@@ -17,7 +17,7 @@ object StreamFile {
     
     var lineCount=0
     
-    val topic="MyTopic"
+    val topic="MyStream"
     
     
    
