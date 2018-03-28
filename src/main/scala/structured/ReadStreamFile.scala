@@ -42,13 +42,13 @@ object ReadStreamFile {
       }
     }
     val sparkConf=new SparkConf().setMaster("local[*]").setAppName("StreamProcessing")
-    val kafkaParams = Map[String, Object]
+    val kafkaParams = (Map[String, Object]
                       ( "bootstrap.servers" -> "localhost:9092", 
                         "key.deserializer" -> classOf[StringDeserializer], 
                         "value.deserializer" -> classOf[StringDeserializer], 
                         "group.id" -> "use_a_separate_group_id_for_each_stream", 
                         "auto.offset.reset" -> "latest", 
-                        "enable.auto.commit" -> (false: java.lang.Boolean) )
+                        "enable.auto.commit" -> (false: java.lang.Boolean) ))
                         
     val ssc=new StreamingContext(sparkConf,Seconds(5))
     val topics = Array("topicA")
