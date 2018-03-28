@@ -50,12 +50,15 @@ object ReadStreamFile {
                         "auto.offset.reset" -> "latest", 
                         "enable.auto.commit" -> (false: java.lang.Boolean) ))
                         
+    println("Starting the process")
+                        
     val ssc=new StreamingContext(sparkConf,Seconds(5))
     val topics = Array("MyStream")
+    
     val stream = KafkaUtils.createDirectStream[String, String](
                 ssc,  PreferConsistent,  Subscribe[String, String](topics, kafkaParams))
     
-    
+    println("Finished")
     
     
   }
