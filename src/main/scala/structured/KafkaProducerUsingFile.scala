@@ -1,7 +1,0 @@
-package structured
-
-object KafkaProducerUsingFile {
-  
-}
-
-
