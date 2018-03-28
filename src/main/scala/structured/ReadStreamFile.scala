@@ -51,7 +51,7 @@ object ReadStreamFile {
                         "enable.auto.commit" -> (false: java.lang.Boolean) ))
                         
     val ssc=new StreamingContext(sparkConf,Seconds(5))
-    val topics = Array("topicA")
+    val topics = Array("MyStream")
     val stream = KafkaUtils.createDirectStream[String, String](
                 ssc,  PreferConsistent,  Subscribe[String, String](topics, kafkaParams))
     
