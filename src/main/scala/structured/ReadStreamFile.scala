@@ -10,6 +10,7 @@ import org.apache.spark.streaming._
 import org.apache.spark.streaming.Seconds
 import org.apache.spark.streaming.dstream.{ DStream, InputDStream }
 
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.streaming.kafka010._ 
@@ -41,7 +42,7 @@ object ReadStreamFile {
       }
     }
     val sparkConf=new SparkConf().setMaster("local[*]").setAppName("StreamProcessing")
-    val kafkaParams = Map[String, String]
+    val kafkaParams = Map[String, Object]
                       ( "bootstrap.servers" -> "localhost:9092", 
                         "key.deserializer" -> classOf[StringDeserializer], 
                         "value.deserializer" -> classOf[StringDeserializer], 
@@ -50,8 +51,11 @@ object ReadStreamFile {
                         "enable.auto.commit" -> (false: java.lang.Boolean) )
                         
     val ssc=new StreamingContext(sparkConf,Seconds(5))
+    val topics = Array("topicA")
+    val stream = KafkaUtils.createDirectStream[String, String](
+                ssc,  PreferConsistent,  Subscribe[String, String](topics, kafkaParams))
     
-    val dStream=KafkaUtils.createDirectStream[String,String](ssc, kafkaParams, topicsSet)
+    
     
     
   }
