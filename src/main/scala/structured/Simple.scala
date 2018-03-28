@@ -3,9 +3,12 @@ package structured
 import utils.{ KafkaServer, SimpleKafkaClient }
 import org.apache.kafka.clients.producer.{ KafkaProducer, ProducerRecord }
 import org.apache.spark.sql._
+
+import org.apache.log4j._
 object Simple {
   def main(args: Array[String]) {
 
+    Logger.getLogger("org").setLevel(Level.ERROR)
     val topic = "foo"
 
     println("Starting Kafka server")
@@ -17,7 +20,7 @@ object Simple {
 
     // publish some messages
     println("*** Publishing messages")
-    val max = 5
+    val max = 10
     val client = new SimpleKafkaClient(kafkaServer)
     val numbers = 1 to max
     val producer = new KafkaProducer[String, String](client.basicStringStringProducer)
