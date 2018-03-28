@@ -12,6 +12,8 @@ object Producer {
     
     Logger.getLogger("org").setLevel(Level.ERROR)
 
+    val filename = "./src/main/resources/datafile.txt"
+    
     val props = new Properties()
     props.put("bootstrap.servers", "localhost:9092")
 
