@@ -34,7 +34,7 @@ object KafkaExample {
             "value.deserializer" ->"org.apache.kafka.common.serialization.StringDeserializer",
             "group.id" -> "group1")
     // List of topics you want to listen for from Kafka
-    val topics = List("MyTopic").toSet
+    val topics = List("testLogs").toSet
     // Create our Kafka stream, which will contain (topic,message) pairs. We tack a 
     // map(_._2) at the end in order to only get the messages, which contain individual
     // lines of data.
